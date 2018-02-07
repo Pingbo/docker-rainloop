@@ -1,5 +1,3 @@
-[![](https://badge.imagelayers.io/krishath/rainloop-ssl:latest.svg)](https://imagelayers.io/?images=krishath/rainloop-ssl:latest 'Get your own badge on imagelayers.io')
-
 Docker Rainloop
 =============
 
@@ -13,39 +11,34 @@ How to use
 -------
 
 	docker pull pingbo/rainloop-ssl
-	docker run -d --name rainloop -v LetsEncrypt/live:/etc/ssl -h rainloop -p 443:443 krishath/rainloop
+	docker run -d --name rainloop -v LetsEncrypt/live:/etc/ssl -h rainloop -p 443:443 pingbo/rainloop
+
+Example with Jwilder's NGINX Proxy and Lets Encrypt
+-------
+
+  rainloop:
+    image: pingbo/rainloop
+    container_name: rainloop
+    environment:
+    - VIRTUAL_HOST=mail.domain.tld
+    - VIRTUAL_PROTO=https
+    - VIRTUAL_PORT=443
+    - LETSENCRYPT_HOST=mail.domain.tld
+    - LETSENCRYPT_EMAIL=foo@bar
+    volumes:
+    - path/to/rainloop/data:/webapps/rainloop/data
+    - path/to/letsencrypt/mail.domain.tld/:/etc/ssl/
+    ports:
+    - "443:443"
+    network_mode: bridge
 
 Open your browser and visit 
 	
 	https://127.0.0.1
 
-SSL
----
-Mount your host folder containing your cert && key to `/etc/ssl`.
-Name (or link) them as `cert.key` and `cert.pem`.
-
-
-Diffie-Hellman
---------------
-Create a new pair of DH keys and mount them to `/etc/ssl/certs/dhparam.pem`
-
-You can generate them by issuing: `openssl dhparam -out dhparam.pem 4096`
-
 Data Persistance
 ----------------
 Mount your data folder to `/webapps/rainloop/data`.
-
-
-docker-compose example config:
-------------------------------
-
-	webmail:
-	  image: "pingbo/rainloop-ssl"
-	  volumes:
-	   - ./webmail/ssl:/etc/ssl
-	   - ./webmail/data:/webapps/rainloop/data
-	  ports:
-	    - "9000:443"
 
 
 License
