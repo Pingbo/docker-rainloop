@@ -3,13 +3,17 @@
 Docker Rainloop
 =============
 
+Forked from https://github.com/peperunas/docker-rainloop
+
+Working now with Let's Encrypt
+
 Rainloop web client Docker image using nginx (SSL).
 
 How to use
 -------
 
-	docker pull krishath/rainloop-ssl
-	docker run -d --name rainloop -v certfolder:/etc/ssl -h rainloop -p 443:443 krishath/rainloop
+	docker pull pingbo/rainloop-ssl
+	docker run -d --name rainloop -v LetsEncrypt/live:/etc/ssl -h rainloop -p 443:443 krishath/rainloop
 
 Open your browser and visit 
 	
@@ -36,7 +40,7 @@ docker-compose example config:
 ------------------------------
 
 	webmail:
-	  image: "krishath/rainloop-ssl"
+	  image: "pingbo/rainloop-ssl"
 	  volumes:
 	   - ./webmail/ssl:/etc/ssl
 	   - ./webmail/data:/webapps/rainloop/data
