@@ -13,8 +13,8 @@ ADD . /docker
 
 RUN mkdir -p /webapps/rainloop /webapps/logs/rainloop && \
 	cd /tmp && \
-	curl -R -L -O "http://repository.rainloop.net/v2/webmail/rainloop-latest.zip" && \
-	unzip rainloop-latest.zip -d /webapps/rainloop && \
+	curl -R -L -O "http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip" && \
+	unzip rainloop-community-latest.zip -d /webapps/rainloop && \
 	find /webapps/rainloop -type d -exec chmod 755 {} \; && \
 	find /webapps/rainloop -type f -exec chmod 644 {} \; && \
 	chown -R www-data:www-data /webapps/rainloop && \
