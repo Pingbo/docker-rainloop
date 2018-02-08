@@ -10,27 +10,27 @@ Rainloop web client Docker image using nginx (SSL).
 How to use
 -------
 
-	docker pull pingbo/rainloop-ssl
-	docker run -d --name rainloop -v LetsEncrypt/live:/etc/ssl -h rainloop -p 443:443 pingbo/rainloop
+	docker pull pingbo/docker-rainloop
+	docker run -d --name rainloop -v LetsEncrypt/live:/etc/ssl -h rainloop -p 443:443 pingbo/docker-rainloop
 
 Example with Jwilder's NGINX Proxy and Lets Encrypt
 -------
 
-  rainloop:
-    image: pingbo/rainloop
-    container_name: rainloop
-    environment:
-    - VIRTUAL_HOST=mail.domain.tld
-    - VIRTUAL_PROTO=https
-    - VIRTUAL_PORT=443
-    - LETSENCRYPT_HOST=mail.domain.tld
-    - LETSENCRYPT_EMAIL=foo@bar
-    volumes:
-    - path/to/rainloop/data:/webapps/rainloop/data
-    - path/to/letsencrypt/mail.domain.tld/:/etc/ssl/
-    ports:
-    - "443:443"
-    network_mode: bridge
+	rainloop:
+		image: pingbo/docker-rainloop
+		container_name: rainloop
+		environment:
+		- VIRTUAL_HOST=mail.domain.tld
+		- VIRTUAL_PROTO=https
+		- VIRTUAL_PORT=443
+		- LETSENCRYPT_HOST=mail.domain.tld
+		- LETSENCRYPT_EMAIL=foo@bar
+		volumes:
+		- path/to/rainloop/data:/webapps/rainloop/data
+		- path/to/letsencrypt/mail.domain.tld/:/etc/ssl/
+		ports:
+		- "443:443"
+		network_mode: bridge
 
 Open your browser and visit 
 	
